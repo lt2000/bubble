@@ -20,7 +20,6 @@ dataset="$1"
 vertex_count="$2"
 stdout_file="$3"
 ingest_thread="$4"
-bs="$5"
 
 # Set pwd to the project root
 pushd "$(dirname "$script_file")"/../..
@@ -32,7 +31,7 @@ pushd "$(dirname "$script_file")"/../..
 
     # Run the benchmark
     pushd ./related_works/LSGraph
-        CILK_NWORKERS=$ingest_thread stdbuf -oL -eL ./LSGraph-Bench -f $DATASET_FILE -bs $bs  2>&1 | tee $TMP_OUTPUT_FILE
+        CILK_NWORKERS=$ingest_thread stdbuf -oL -eL ./LSGraph-Bench -f $DATASET_FILE -bs $((2**16))  2>&1 | tee $TMP_OUTPUT_FILE
     popd # Go back to the project root
 
 popd # Go back to original directory
