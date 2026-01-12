@@ -60,7 +60,8 @@ if __name__ == '__main__':
     # DATASETS_TO_TEST = [datasets.livejournal]
     # THREADS_TO_TEST = [2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80]
     # THREADS_TO_TEST = [4, 8, 16, 32, 48, 64, 80]
-    THREADS_TO_TEST = [4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80]
+    # THREADS_TO_TEST = [4, 8, 16, 32, 64, 96, 128]
+    THREADS_TO_TEST = [4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128]
     # THREADS_TO_TEST = [80]
     
 

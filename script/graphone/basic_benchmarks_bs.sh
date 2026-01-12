@@ -20,7 +20,6 @@ dataset="$1"
 vertex_count="$2"
 stdout_file="$3"
 ingest_thread="$4"
-bs="$5"
 
 # Set pwd to the project root
 pushd "$(dirname "$script_file")"/../..
@@ -30,9 +29,14 @@ pushd "$(dirname "$script_file")"/../..
     DATASET_FILE=`realpath $dataset`
     DATASET_DIR=`dirname $DATASET_FILE`
 
+    # if ingest_thread is 1, set it to 2
+    if [ $ingest_thread -eq 1 ]; then
+        ingest_thread=2
+    fi
+
     # Run the benchmark
-    pushd ./related_works/LSGraph
-        CILK_NWORKERS=$ingest_thread stdbuf -oL -eL ./LSGraph-Bench -f $DATASET_FILE -bs $bs  2>&1 | tee $TMP_OUTPUT_FILE
+    pushd ./related_works/GraphOne
+        stdbuf -oL -eL ./build/graphone-bench -t $(($ingest_thread - 1)) -i $DATASET_DIR -v $2 2>&1 | tee $TMP_OUTPUT_FILE
     popd # Go back to the project root
 
 popd # Go back to original directory

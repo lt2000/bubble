@@ -85,6 +85,11 @@ bfs_avg = extract_multiple_data(expdata_list, 'work', 'dataset', 'bfs')
 pr_avg = extract_multiple_data(expdata_list, 'work', 'dataset', 'pr')
 cc_avg = extract_multiple_data(expdata_list, 'work', 'dataset', 'cc')
 
+
+print('='*30)
+
+print(ingest_avg)
+
 edges = np.asarray([datasets.dataset_by_name(name).ecount for name in ingest_avg.columns], dtype=np.float32)
 ingest_tp = (1 / ingest_avg).mul(edges, axis=1) * 1e-6
 
@@ -143,6 +148,8 @@ def plot_normalized_bar(df, filename, colors, figsize=(5, 2), linewidth=0.3, dpi
 figsize = (5, 1.5)
 linewidth = 0.3
 dpi = 100
+
+# print(bfs_avg)
 
 ax_bfs = plot_normalized_bar(bfs_avg, meta.PROJECT_DIR + '/figs/bfs.pdf', colors, figsize, linewidth, dpi)
 ax_pr = plot_normalized_bar(pr_avg, meta.PROJECT_DIR + '/figs/pr.pdf', colors, figsize, linewidth, dpi)
