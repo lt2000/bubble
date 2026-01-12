@@ -44,6 +44,25 @@ protein2 = Dataset(
     ecount=4234728014,
 )
 
+N = [23]
+M = [16, 32, 64, 128]
+def gen_kron(e: int, v: int) -> list[Dataset]:
+    dataset =  []
+    for n in e:
+        for m in v:
+            dataset.append(
+                Dataset(
+                    name=f"kron_n{n}_m{m}",
+                    path=f"./data/bin32/shuffled/kron/kron_n{n}_m{m}.bin",
+                    vcount=2**n,
+                    ecount=(2**n)*m,
+                )
+
+            )
+    return dataset
+KRON_DATASETS = gen_kron(N,M)     
+
+
 DATASETS: list[Dataset] = [
     livejournal,
     # wikipedia,   # XPGraph BFS got wrong result
